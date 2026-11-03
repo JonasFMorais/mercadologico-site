@@ -123,8 +123,8 @@
       <h1>Conheça a ferramenta</h1>
       <p>Acesse uma prévia navegável com dados fictícios para conhecer os principais recursos antes de baixar o aplicativo.</p>
       <form id="login-form">
-        <label class="field" for="email">E-MAIL DE DEMONSTRAÇÃO</label>
-        <input id="email" type="email" value="demo@mercadologico.app.br" autocomplete="username" required />
+        <label class="field" for="username">USUÁRIO</label>
+        <input id="username" type="text" value="demo.inicial" autocomplete="username" required />
         <label class="field" for="password">SENHA</label>
         <input id="password" type="password" value="mercadologico" autocomplete="current-password" required />
         <div id="login-error" class="error" role="alert"></div>
@@ -200,7 +200,7 @@
     function showToast(text) { const el = $("#toast"); el.textContent = text; el.classList.add("show"); setTimeout(() => el.classList.remove("show"), 2600); }
     function renderList() { $("#shopping-list").innerHTML = items.map((item, i) => `<div class="row"><button class="check ${item[3] ? "done" : ""}" data-check="${i}">${item[3] ? "✓" : ""}</button><div class="row-main"><strong>${item[0]}</strong><small>${item[1]}</small></div><span class="price">${item[2]}</span></div>`).join(""); $$("[data-check]").forEach((b) => b.onclick = () => { items[Number(b.dataset.check)][3] = !items[Number(b.dataset.check)][3]; renderList(); }); }
     function openPanel(id) { $$(".panel").forEach((p) => p.classList.toggle("active", p.id === id)); $$("nav button").forEach((b) => b.classList.toggle("active", b.dataset.panel === id)); const titles = {inicio:["Seu poder de compra","Explore as funções já implementadas com dados fictícios."],lista:["Lista de compras","Planeje, revise e acompanhe o orçamento da sua próxima compra."],historico:["Histórico de compras","Notas e preços organizados para orientar suas decisões."],comparar:["Comparar preços","Observe diferenças entre produtos e estabelecimentos."],analises:["Análises Premium","Transforme o histórico em insights visuais."],mercados:["Mercados próximos","Veja como a geolocalização será apresentada."],qrcode:["Leitura de QR Code","Veja a prévia do fluxo futuro de NFC-e."],geoloc:["Geolocalização","Veja a prévia do mapa e dos mercados favoritos."],config:["Configurações","Ajuste preferências e conheça os próximos recursos."]}; $("#page-title").textContent = titles[id][0]; $("#page-subtitle").textContent = titles[id][1]; window.scrollTo({top:0,behavior:"smooth"}); }
-    $("#login-form").addEventListener("submit", (e) => { e.preventDefault(); const email = $("#email").value.trim(); const password = $("#password").value; if (email === "demo@mercadologico.app.br" && password === "mercadologico") { sessionStorage.setItem("mercadologico-demo", "1"); $("#login").classList.add("hidden"); $("#app").classList.remove("hidden"); } else $("#login-error").textContent = "Use o acesso demonstrativo informado na tela."; });
+    $("#login-form").addEventListener("submit", (e) => { e.preventDefault(); const username = $("#username").value.trim(); const password = $("#password").value; if (username === "demo.inicial" && password === "mercadologico") { sessionStorage.setItem("mercadologico-demo", "1"); $("#login").classList.add("hidden"); $("#app").classList.remove("hidden"); } else $("#login-error").textContent = "Use o usuário e a senha demonstrativos informados na tela."; });
     $("#logout").onclick = () => { sessionStorage.removeItem("mercadologico-demo"); location.reload(); };
     $$('nav button').forEach((b) => b.onclick = () => openPanel(b.dataset.panel));
     $$('[data-go]').forEach((b) => b.onclick = () => openPanel(b.dataset.go));
